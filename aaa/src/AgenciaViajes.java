@@ -178,20 +178,37 @@ public class AgenciaViajes extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String nombre = jtxtKilo.getText();
-String puesto = jtxtKilo1.getText();
-String destino = jtxtKilo2.getText();
-String moneda = jtxtKilo4.getText();
-double cantidad = Double.parseDouble(jtxtKilo5.getText());
+String cantidad = jtxtKilo5.getText();
+String moneda = jtxtKilo4.getText().toLowerCase();
+String pais = jtxtKilo2.getText();
 
-double quetzales = cantidad * 7.63;
+double monto = Double.parseDouble(cantidad);
+double resultado = 0;
+String tipoMoneda = "";
+
+if (moneda.equals("dolar")) {
+    resultado = monto * 7.80;
+    tipoMoneda = "Dólar";
+} else if (moneda.equals("euro")) {
+    resultado = monto * 8.50;
+    tipoMoneda = "Euro";
+} else if (moneda.equals("peso")) {
+    resultado = monto * 0.40;
+    tipoMoneda = "Peso";
+} else {
+    JOptionPane.showMessageDialog(null,
+            "Tipo de moneda no válido.\nEscriba: dolar, euro o peso",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+    return;
+}
 
 JOptionPane.showMessageDialog(null,
         "Nombre: " + nombre + "\n" +
-        "Destino: " + destino + "\n" +
-        "Cantidad: " + cantidad + "\n" +
-        "Puesto: " + puesto + "\n" +
-        "Moneda: " + moneda + "\n" +
-        "En Quetzales: Q." + quetzales,
+        "País destino: " + pais + "\n" +
+        "Tipo de moneda: " + tipoMoneda + "\n" +
+        "Cantidad ingresada: Q." + monto + "\n" +
+        "Resultado: " + resultado + " " + tipoMoneda + "s",
         "Agencia de Viajes",
         JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
